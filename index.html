@@ -84,11 +84,15 @@
         <input type="text" name="male" id="male">
         <input type="button" value="Send" onclick="getinfo()">
     </div>
+    <h4 id="result1"></h4>
+    <h4 id="result2"></h4>
 </body>
 <div class="footer">
     Created by <strong>The Ejder</strong> | <a href="https://theeejderr.github.io/My-Page/" target="_blank">Portfolio</a>
 </div>
 <script>
+let result1 = document.getElementById("result1");
+let result2 = document.getElementById("result2");
 function getinfo()
 {
     fetch("https://ml-project-first.onrender.com/predict", {
@@ -103,9 +107,12 @@ function getinfo()
     })
     .then(res => res.json())
     .then(data => {
-      console.log("Output 1:", data.predictions[0,0])
-      console.log("Output 2:", data.predictions[0,1])
-})
+      console.log(data.prediction_1);
+      console.log(data.prediction_2);
+    
+      result1.innerText = data.prediction_1;
+      result2.innerText = data.prediction_2;
+    })
 }
 </script>
 </html>

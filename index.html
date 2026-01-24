@@ -103,8 +103,8 @@ function getinfo()
     })
     .then(res => res.json())
     .then(data => {
-      console.log("Output 1:", data.predictions[0])
-      console.log("Output 2:", data.predictions[1])
+      console.log("Output 1:", data.predictions[0,0])
+      console.log("Output 2:", data.predictions[0,1])
 })
 }
 </script>

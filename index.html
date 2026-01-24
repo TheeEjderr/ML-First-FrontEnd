@@ -6,7 +6,6 @@
     <title>Document</title>
 </head>
 <style>
-
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: #f4f7f6;
@@ -14,8 +13,6 @@
         justify-content: center;
         padding: 50px;
     }
-
-
     input[type="text"] {
         width: 100%;
         padding: 12px 15px;
@@ -28,14 +25,10 @@
         outline: none;
         font-size: 16px;
     }
-
-
     input[type="text"]:focus {
         border-color: #2ecc71; 
         box-shadow: 0 0 8px rgba(46, 204, 113, 0.3);
     }
-
-
     input[type="button"] {
         width: 100%;
         background-color: #2c3e50; 
@@ -50,15 +43,33 @@
         text-transform: uppercase;
         transition: background-color 0.3s, transform 0.1s;
     }
-
-
     input[type="button"]:hover {
         background-color: #34495e;
     }
-
     input[type="button"]:active {
         transform: scale(0.98);
     }
+    .footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #7f8c8d;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+.footer strong {
+    color: #2c3e50;
+}
+.footer a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+.footer a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
 </style>
 <body>
     
@@ -73,7 +84,9 @@
         <input type="text" name="male" id="male">
         <input type="button" value="Send" onclick="getinfo()">
     </div>
-
+    <div class="footer">
+        Created by <strong>The Ejder</strong> | <a href="https://theeejderr.github.io/My-Page/" target="_blank">Portfolio</a>
+    </div>
 </body>
 <script>
 function getinfo()

@@ -9,9 +9,16 @@
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: #f4f7f6;
-        display: flex;
         justify-content: center;
         padding: 50px;
+    }
+    #now
+    {
+        width: 100%;
+        height: 30px;
+        text-align: center;
+        border-radius: 10px;
+        opacity: 0.8;
     }
     input[type="text"] {
         width: 100%;
@@ -49,27 +56,28 @@
     input[type="button"]:active {
         transform: scale(0.98);
     }
-    .footer {
+    .footer 
+    {
     margin-top: 25px;
     text-align: center;
     font-size: 14px;
     color: #7f8c8d;
     border-top: 1px solid #eee;
     padding-top: 15px;
-}
-.footer strong {
-    color: #2c3e50;
-}
-.footer a {
-    color: #3498db;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-.footer a:hover {
-    color: #2980b9;
-    text-decoration: underline;
-}
+    }
+    .footer strong {
+        color: #2c3e50;
+    }
+    .footer a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+    .footer a:hover {
+        color: #2980b9;
+        text-decoration: underline;
+    }
 </style>
 <body>
     
@@ -84,39 +92,60 @@
         <input type="text" name="male" id="male">
         <input type="button" value="Send" onclick="getinfo()">
     </div>
-    <br>
     <h4 id="result1"></h4>
     <br>
     <h4 id="result2"></h4>
+    <br>
+    <h4 id="now"></h4>
 </body>
 <div class="footer">
     Created by <strong>The Ejder</strong> | <a href="https://theeejderr.github.io/My-Page/" target="_blank">Portfolio</a>
 </div>
 <script>
+let age = document.getElementById("age");
+let sleep = document.getElementById("sleep");
+let activity = document.getElementById("activity");
+let male = document.getElementById("male");
 let result1 = document.getElementById("result1");
 let result2 = document.getElementById("result2");
+let now = document.getElementById("now");
+
+
+fetch("https://ml-project-first.onrender.com")
+.then(res => res.json())
+.then(data => {
+    if (data.status == "API is running") {
+        console.log(data.status);
+        now.innerText = "Running";
+        now.style.backgroundColor = "lightgreen";
+    }
+    else
+    {
+        now.innerText = "Wait for the model to wake up...";
+        now.style.backgroundColor = "red";
+    }
+});
+
 function getinfo()
 {
     fetch("https://ml-project-first.onrender.com/predict", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-        age: 25,
-        sleep: 7,
-        activity: 3,
-        male: 1
+        age: age.value,
+        sleep: sleep.value,
+        activity: activity.value,
+        male: male.value
     })
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data.prediction_1);
-      console.log(data.prediction_2);
+        console.log(data.prediction_1);
+        console.log(data.prediction_2);
     
-      result1.innerText = data.prediction_1;
-      result2.innerText = data.prediction_2;
+        result1.innerText = "Sleep Quality = " + data.prediction_1;
+        result2.innerText = "Stress = " + data.prediction_2;
     })
 }
 </script>
 </html>
-
-
